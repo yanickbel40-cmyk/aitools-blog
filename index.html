@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Toolbox Pro - Best AI Tools & Productivity Guides 2026</title>
     <meta name="description" content="Discover the best AI tools for productivity, business automation, content creation and more. In-depth reviews, comparisons and guides.">
-    <link rel="canonical" href="https://yanissabile.github.io/aitools-blog/">
+    <link rel="canonical" href="https://yanickbel40-cmyk.github.io/aitools-blog/">
+    <link rel="stylesheet" href="assets/pro-styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="AI Toolbox">
+    <meta property="og:title" content="AI Toolbox Pro - Best AI Tools & Productivity Guides 2026">
+    <meta property="og:description" content="Discover the best AI tools for productivity, business automation, content creation and more.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200">
+    <meta property="og:url" content="https://yanickbel40-cmyk.github.io/aitools-blog/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: #f8f9fa; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
-        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         header h1 { font-size: 1.5rem; }
         header h1 span { color: #00d4ff; }
         header nav a { color: #ccc; text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
@@ -20,6 +31,7 @@
         .hero h2 { font-size: 2.2rem; margin-bottom: 15px; }
         .hero p { font-size: 1.1rem; color: #aaa; max-width: 700px; margin: 0 auto; }
         .hero .cta { display: inline-block; margin-top: 25px; background: #00d4ff; color: #1a1a2e; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .hero .cta:hover { background: #00b8d4; }
         .section-title { font-size: 1.8rem; margin: 40px 0 20px; text-align: center; }
         .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; margin: 30px 0; }
         .post-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
@@ -32,106 +44,27 @@
         .post-card p { color: #666; font-size: 0.9rem; margin-bottom: 12px; }
         .post-card .meta { font-size: 0.8rem; color: #999; }
         .post-card .read-more { display: inline-block; margin-top: 10px; color: #00d4ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        .categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0; }
-        .categories a { background: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; color: #1a1a2e; font-size: 0.9rem; box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
-        .categories a:hover { background: #00d4ff; color: white; }
+        .category-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0; }
+        .category-filters .filter-btn { background: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; color: #1a1a2e; font-size: 0.9rem; box-shadow: 0 1px 5px rgba(0,0,0,0.05); cursor: pointer; border: none; font-weight: 500; }
+        .category-filters .filter-btn:hover, .category-filters .filter-btn.active { background: #00d4ff; color: white; }
         .newsletter { background: white; padding: 40px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
         .newsletter h3 { margin-bottom: 10px; }
-        .newsletter input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; width: 300px; max-width: 100%; margin-top: 15px; }
+        .newsletter p { color: #666; margin-bottom: 15px; }
+        .newsletter input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; width: 300px; max-width: 100%; }
         .newsletter button { padding: 12px 25px; background: #00d4ff; color: #1a1a2e; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
         footer { background: #1a1a2e; color: #999; padding: 30px 0; text-align: center; margin-top: 40px; }
         footer nav a { color: #00d4ff; text-decoration: none; margin: 0 10px; }
+        footer nav a:hover { text-decoration: underline; }
+        .search-bar { max-width: 500px; margin: 20px auto; display: flex; gap: 10px; }
+        .search-bar input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+        .search-bar button { padding: 12px 20px; background: #00d4ff; color: #1a1a2e; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
         @media (max-width: 600px) {
             .hero h2 { font-size: 1.5rem; }
             .posts-grid { grid-template-columns: 1fr; }
+            header .container { flex-direction: column; text-align: center; }
+            header nav a { margin: 0 10px; }
         }
     </style>
-
-<link rel="manifest" href="/aitools-blog/manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="AI Toolbox">
-<link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=180&h=180">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
-  "author": {"@type": "Person", "name": "AI Toolbox Pro"},
-  "publisher": {"@type": "Organization", "name": "AI Toolbox Pro"},
-  "datePublished": "2026-05-01",
-  "dateModified": "2026-05-10"
-}
-</script>
-<link rel="stylesheet" href="/aitools-blog/assets/pro-styles.css">
-
-<meta property="og:title" content="AI Toolbox Pro - Best AI Tools & Productivity Guides 2026</title>
-    <meta name="description" content="Discover the best AI tools for productivity, business automation, content creation and more. In-depth reviews, comparisons and guides.">
-    <link rel="canonical" href="https://yanissabile.github.io/aitools-blog/">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: #f8f9fa; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
-        header .container { display: flex; justify-content: space-between; align-items: center; }
-        header h1 { font-size: 1.5rem; }
-        header h1 span { color: #00d4ff; }
-        header nav a { color: #ccc; text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
-        header nav a:hover { color: #00d4ff; }
-        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: white; padding: 60px 0; text-align: center; }
-        .hero h2 { font-size: 2.2rem; margin-bottom: 15px; }
-        .hero p { font-size: 1.1rem; color: #aaa; max-width: 700px; margin: 0 auto; }
-        .hero .cta { display: inline-block; margin-top: 25px; background: #00d4ff; color: #1a1a2e; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; }
-        .section-title { font-size: 1.8rem; margin: 40px 0 20px; text-align: center; }
-        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; margin: 30px 0; }
-        .post-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
-        .post-card:hover { transform: translateY(-3px); }
-        .post-card .content { padding: 20px; }
-        .post-card .category { font-size: 0.8rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .post-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .post-card h3 a { color: #1a1a2e; text-decoration: none; }
-        .post-card h3 a:hover { color: #00d4ff; }
-        .post-card p { color: #666; font-size: 0.9rem; margin-bottom: 12px; }
-        .post-card .meta { font-size: 0.8rem; color: #999; }
-        .post-card .read-more { display: inline-block; margin-top: 10px; color: #00d4ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        .categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0; }
-        .categories a { background: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; color: #1a1a2e; font-size: 0.9rem; box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
-        .categories a:hover { background: #00d4ff; color: white; }
-        .newsletter { background: white; padding: 40px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-        .newsletter h3 { margin-bottom: 10px; }
-        .newsletter input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; width: 300px; max-width: 100%; margin-top: 15px; }
-        .newsletter button { padding: 12px 25px; background: #00d4ff; color: #1a1a2e; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        footer { background: #1a1a2e; color: #999; padding: 30px 0; text-align: center; margin-top: 40px; }
-        footer nav a { color: #00d4ff; text-decoration: none; margin: 0 10px; }
-        @media (max-width: 600px) {
-            .hero h2 { font-size: 1.5rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-
-<link rel="manifest" href="/aitools-blog/manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="AI Toolbox">
-<link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=180&h=180">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
-  "author": {"@type": "Person", "name": "AI Toolbox Pro"},
-  "publisher": {"@type": "Organization", "name": "AI Toolbox Pro"},
-  "datePublished": "2026-05-01",
-  "dateModified": "2026-05-10"
-}
-</script>
-<link rel="stylesheet" href="/aitools-blog/assets/pro-styles.css">
 </head>
 <body>
 
@@ -140,9 +73,8 @@
         <h1>AI <span>Toolbox</span>.pro</h1>
         <nav>
             <a href="/aitools-blog/">Home</a>
-            <a href="/aitools-blog/posts/reviews/">Reviews</a>
-            <a href="/aitools-blog/posts/guides/">Guides</a>
-            <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
+            <a href="/aitools-blog/about.html">About</a>
+            <a href="/aitools-blog/contact.html">Contact</a>
         </nav>
     </div>
 </header>
@@ -150,34 +82,38 @@
 <section class="hero">
     <div class="container">
         <h2>Your Guide to the Best AI Tools in 2026</h2>
-        <p>In-depth reviews, expert comparisons, and productivity guides for AI tools that actually save you time and money.</p>
-        <a href="/aitools-blog/posts/guides/best-ai-productivity-tools-2026.html" class="cta">See Top Tools →</a>
+        <p>In-depth reviews, expert comparisons, and productivity guides for AI tools that actually save you time and money. Updated daily.</p>
+        <a href="#posts" class="cta" onclick="document.getElementById('posts').scrollIntoView({behavior:'smooth'})">Browse Articles ↓</a>
     </div>
 </section>
 
-<div class="container">
+<div class="container" id="posts">
 
-    <div class="categories">
-        <a href="/aitools-blog/posts/reviews/">Reviews</a>
-        <a href="/aitools-blog/posts/guides/">Guides</a>
-        <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
-        <a href="/aitools-blog/posts/trends/">Trends</a>
-        <a href="/aitools-blog/posts/monetization/">Monetization</a>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search AI tools, guides..." onkeyup="filterPosts()">
+        <button onclick="filterPosts()">🔍</button>
+    </div>
+
+    <div class="category-filters">
+        <button class="filter-btn active" onclick="filterByCategory('all', this)">All</button>
+        <button class="filter-btn" onclick="filterByCategory('Guides', this)">📘 Guides</button>
+        <button class="filter-btn" onclick="filterByCategory('Reviews', this)">⭐ Reviews</button>
+        <button class="filter-btn" onclick="filterByCategory('Comparisons', this)">⚖️ Comparisons</button>
+        <button class="filter-btn" onclick="filterByCategory('Trends', this)">📈 Trends</button>
+        <button class="filter-btn" onclick="filterByCategory('Monetization', this)">💰 Monetization</button>
     </div>
 
     <h2 class="section-title">Latest Articles</h2>
 
     <div class="posts-grid" id="post-list">
-        <!-- Posts will be loaded here by the generator -->
+        <!-- Posts loaded from JSON -->
     </div>
 
     <div class="newsletter">
-        <h3>Get Weekly AI Tool Updates</h3>
+        <h3>📬 Get Weekly AI Tool Updates</h3>
         <p>Stay ahead with the latest tools, tips, and comparisons — delivered every Monday.</p>
-        <form action="#" method="POST">
-            <input type="email" name="email" placeholder="Your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
+        <input type="email" id="newsletter-email" placeholder="Your email address">
+        <button onclick="alert('Thanks! Newsletter feature coming soon.')">Subscribe</button>
     </div>
 
 </div>
@@ -186,286 +122,64 @@
     <div class="container">
         <p>AI Toolbox Pro — Independent reviews of the best AI tools for productivity.</p>
         <nav>
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
+            <a href="/aitools-blog/about.html">About</a>
+            <a href="/aitools-blog/privacy.html">Privacy</a>
+            <a href="/aitools-blog/contact.html">Contact</a>
         </nav>
         <p style="margin-top:10px;">&copy; 2026 AI Toolbox Pro. All rights reserved.</p>
     </div>
 </footer>
 
 <script>
-    // Load posts from JSON
-    fetch('/aitools-blog/posts/posts.json')
-        .then(r => r.json())
-        .then(posts => {
-            const list = document.getElementById('post-list');
-            list.innerHTML = posts.map(p => `
-                <div class="post-card">
-                    <div class="content">
-                        <div class="category">${p.category}</div>
-                        <h3><a href="${p.url}">${p.title}</a></h3>
-                        <p>${p.excerpt}</p>
-                        <div class="meta">${p.date} · ${p.readTime} min read</div>
-                        <a href="${p.url}" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            `).join('');
-        });
-</script>
+fetch('/aitools-blog/posts/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+        window.allPosts = posts;
+        renderPosts(posts);
+    });
 
+function renderPosts(posts) {
+    const list = document.getElementById('post-list');
+    if (posts.length === 0) {
+        list.innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;">No articles found.</p>';
+        return;
+    }
+    list.innerHTML = posts.map(p => `
+        <div class="post-card">
+            <div class="content">
+                <div class="category">${p.category}</div>
+                <h3><a href="/aitools-blog/${p.url}">${p.title}</a></h3>
+                <p>${p.excerpt}</p>
+                <div class="meta">${p.date} · ${p.readTime} min read</div>
+                <a href="/aitools-blog/${p.url}" class="read-more">Read More →</a>
+            </div>
+        </div>
+    `).join('');
+}
 
-<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/aitools-blog/sw.js");}</script>
+function filterByCategory(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (cat === 'all') {
+        renderPosts(window.allPosts || []);
+    } else {
+        renderPosts((window.allPosts || []).filter(p => p.category === cat));
+    }
+}
 
-<script src="/aitools-blog/assets/pro-scripts.js"></script>
-
-</body>
-</html> | AI Toolbox Pro">
-<meta property="og:description" content="Expert reviews and guides for AI productivity tools in 2026.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200">
-<meta property="og:url" content="https://yanickbel40-cmyk.github.io/aitools-blog/">
-<meta property="og:type" content="article">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Toolbox Pro - Best AI Tools & Productivity Guides 2026</title>
-    <meta name="description" content="Discover the best AI tools for productivity, business automation, content creation and more. In-depth reviews, comparisons and guides.">
-    <link rel="canonical" href="https://yanissabile.github.io/aitools-blog/">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: #f8f9fa; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
-        header .container { display: flex; justify-content: space-between; align-items: center; }
-        header h1 { font-size: 1.5rem; }
-        header h1 span { color: #00d4ff; }
-        header nav a { color: #ccc; text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
-        header nav a:hover { color: #00d4ff; }
-        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: white; padding: 60px 0; text-align: center; }
-        .hero h2 { font-size: 2.2rem; margin-bottom: 15px; }
-        .hero p { font-size: 1.1rem; color: #aaa; max-width: 700px; margin: 0 auto; }
-        .hero .cta { display: inline-block; margin-top: 25px; background: #00d4ff; color: #1a1a2e; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; }
-        .section-title { font-size: 1.8rem; margin: 40px 0 20px; text-align: center; }
-        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; margin: 30px 0; }
-        .post-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
-        .post-card:hover { transform: translateY(-3px); }
-        .post-card .content { padding: 20px; }
-        .post-card .category { font-size: 0.8rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .post-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .post-card h3 a { color: #1a1a2e; text-decoration: none; }
-        .post-card h3 a:hover { color: #00d4ff; }
-        .post-card p { color: #666; font-size: 0.9rem; margin-bottom: 12px; }
-        .post-card .meta { font-size: 0.8rem; color: #999; }
-        .post-card .read-more { display: inline-block; margin-top: 10px; color: #00d4ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        .categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0; }
-        .categories a { background: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; color: #1a1a2e; font-size: 0.9rem; box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
-        .categories a:hover { background: #00d4ff; color: white; }
-        .newsletter { background: white; padding: 40px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-        .newsletter h3 { margin-bottom: 10px; }
-        .newsletter input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; width: 300px; max-width: 100%; margin-top: 15px; }
-        .newsletter button { padding: 12px 25px; background: #00d4ff; color: #1a1a2e; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        footer { background: #1a1a2e; color: #999; padding: 30px 0; text-align: center; margin-top: 40px; }
-        footer nav a { color: #00d4ff; text-decoration: none; margin: 0 10px; }
-        @media (max-width: 600px) {
-            .hero h2 { font-size: 1.5rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-
-<link rel="manifest" href="/aitools-blog/manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="AI Toolbox">
-<link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=180&h=180">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
-  "author": {"@type": "Person", "name": "AI Toolbox Pro"},
-  "publisher": {"@type": "Organization", "name": "AI Toolbox Pro"},
-  "datePublished": "2026-05-01",
-  "dateModified": "2026-05-10"
+function filterPosts() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    if (!query) {
+        renderPosts(window.allPosts || []);
+        return;
+    }
+    const filtered = (window.allPosts || []).filter(p => 
+        p.title.toLowerCase().includes(query) || 
+        (p.excerpt || '').toLowerCase().includes(query)
+    );
+    renderPosts(filtered);
 }
 </script>
-<link rel="stylesheet" href="/aitools-blog/assets/pro-styles.css">
-</head>
-<body>
-
-<header>
-    <div class="container">
-        <h1>AI <span>Toolbox</span>.pro</h1>
-        <nav>
-            <a href="/aitools-blog/">Home</a>
-            <a href="/aitools-blog/posts/reviews/">Reviews</a>
-            <a href="/aitools-blog/posts/guides/">Guides</a>
-            <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
-        </nav>
-    </div>
-</header>
-
-<section class="hero">
-    <div class="container">
-        <h2>Your Guide to the Best AI Tools in 2026</h2>
-        <p>In-depth reviews, expert comparisons, and productivity guides for AI tools that actually save you time and money.</p>
-        <a href="/aitools-blog/posts/guides/best-ai-productivity-tools-2026.html" class="cta">See Top Tools →</a>
-    </div>
-</section>
-
-<div class="container">
-
-    <div class="categories">
-        <a href="/aitools-blog/posts/reviews/">Reviews</a>
-        <a href="/aitools-blog/posts/guides/">Guides</a>
-        <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
-        <a href="/aitools-blog/posts/trends/">Trends</a>
-        <a href="/aitools-blog/posts/monetization/">Monetization</a>
-    </div>
-
-    <h2 class="section-title">Latest Articles</h2>
-
-    <div class="posts-grid" id="post-list">
-        <!-- Posts will be loaded here by the generator -->
-    </div>
-
-    <div class="newsletter">
-        <h3>Get Weekly AI Tool Updates</h3>
-        <p>Stay ahead with the latest tools, tips, and comparisons — delivered every Monday.</p>
-        <form action="#" method="POST">
-            <input type="email" name="email" placeholder="Your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-
-</div>
-
-<footer>
-    <div class="container">
-        <p>AI Toolbox Pro — Independent reviews of the best AI tools for productivity.</p>
-        <nav>
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <p style="margin-top:10px;">&copy; 2026 AI Toolbox Pro. All rights reserved.</p>
-    </div>
-</footer>
-
-<script>
-    // Load posts from JSON
-    fetch('/aitools-blog/posts/posts.json')
-        .then(r => r.json())
-        .then(posts => {
-            const list = document.getElementById('post-list');
-            list.innerHTML = posts.map(p => `
-                <div class="post-card">
-                    <div class="content">
-                        <div class="category">${p.category}</div>
-                        <h3><a href="${p.url}">${p.title}</a></h3>
-                        <p>${p.excerpt}</p>
-                        <div class="meta">${p.date} · ${p.readTime} min read</div>
-                        <a href="${p.url}" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            `).join('');
-        });
-</script>
-
-
-<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/aitools-blog/sw.js");}</script>
-
-<script src="/aitools-blog/assets/pro-scripts.js"></script>
-
-</body>
-</html> | AI Toolbox Pro">
-
-</head>
-<body>
-
-<header>
-    <div class="container">
-        <h1>AI <span>Toolbox</span>.pro</h1>
-        <nav>
-            <a href="/aitools-blog/">Home</a>
-            <a href="/aitools-blog/posts/reviews/">Reviews</a>
-            <a href="/aitools-blog/posts/guides/">Guides</a>
-            <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
-        </nav>
-    </div>
-</header>
-
-<section class="hero">
-    <div class="container">
-        <h2>Your Guide to the Best AI Tools in 2026</h2>
-        <p>In-depth reviews, expert comparisons, and productivity guides for AI tools that actually save you time and money.</p>
-        <a href="/aitools-blog/posts/guides/best-ai-productivity-tools-2026.html" class="cta">See Top Tools →</a>
-    </div>
-</section>
-
-<div class="container">
-
-    <div class="categories">
-        <a href="/aitools-blog/posts/reviews/">Reviews</a>
-        <a href="/aitools-blog/posts/guides/">Guides</a>
-        <a href="/aitools-blog/posts/comparisons/">Comparisons</a>
-        <a href="/aitools-blog/posts/trends/">Trends</a>
-        <a href="/aitools-blog/posts/monetization/">Monetization</a>
-    </div>
-
-    <h2 class="section-title">Latest Articles</h2>
-
-    <div class="posts-grid" id="post-list">
-        <!-- Posts will be loaded here by the generator -->
-    </div>
-
-    <div class="newsletter">
-        <h3>Get Weekly AI Tool Updates</h3>
-        <p>Stay ahead with the latest tools, tips, and comparisons — delivered every Monday.</p>
-        <form action="#" method="POST">
-            <input type="email" name="email" placeholder="Your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-
-</div>
-
-<footer>
-    <div class="container">
-        <p>AI Toolbox Pro — Independent reviews of the best AI tools for productivity.</p>
-        <nav>
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <p style="margin-top:10px;">&copy; 2026 AI Toolbox Pro. All rights reserved.</p>
-    </div>
-</footer>
-
-<script>
-    // Load posts from JSON
-    fetch('/aitools-blog/posts/posts.json')
-        .then(r => r.json())
-        .then(posts => {
-            const list = document.getElementById('post-list');
-            list.innerHTML = posts.map(p => `
-                <div class="post-card">
-                    <div class="content">
-                        <div class="category">${p.category}</div>
-                        <h3><a href="${p.url}">${p.title}</a></h3>
-                        <p>${p.excerpt}</p>
-                        <div class="meta">${p.date} · ${p.readTime} min read</div>
-                        <a href="${p.url}" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            `).join('');
-        });
-</script>
-
-
-<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/aitools-blog/sw.js");}</script>
-
-<script src="/aitools-blog/assets/pro-scripts.js"></script>
 
 </body>
 </html>
