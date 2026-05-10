@@ -1,0 +1,53 @@
+/* AI Toolbox Pro — PRO Styles */
+/* Dark Mode */
+body.dark-mode { background: #0d1117; color: #c9d1d9; }
+body.dark-mode article { background: #161b22; }
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 { color: #f0f6fc; }
+body.dark-mode p, body.dark-mode li { color: #8b949e; }
+body.dark-mode .post-card { background: #161b22 !important; }
+body.dark-mode .post-card h3 a { color: #f0f6fc; }
+body.dark-mode .newsletter { background: #161b22; }
+body.dark-mode .affiliate-box { background: #1c2333; }
+body.dark-mode .toc { background: #161b22; border: 1px solid #30363d; }
+body.dark-mode table th { background: #21262d; }
+body.dark-mode table td { border-color: #30363d; }
+
+/* TOC Styling */
+.toc { background: #f8f9fa; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; margin: 20px 0; }
+.toc h3 { margin-bottom: 10px; font-size: 1rem; }
+.toc ul { list-style: none; padding: 0; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: #00d4ff; text-decoration: none; font-size: 0.9rem; }
+.toc a:hover { text-decoration: underline; }
+
+/* Reading Progress */
+#reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: #00d4ff; z-index: 9999; }
+
+/* Dark toggle & Back to top */
+.dark-toggle, .back-to-top { transition: opacity 0.3s; }
+
+/* Responsive improvements */
+@media (max-width: 600px) {
+    article { padding: 20px !important; }
+    h1 { font-size: 1.5rem !important; }
+    .toc { padding: 15px; }
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Image hover zoom */
+.featured-image { transition: transform 0.3s; cursor: pointer; }
+.featured-image:hover { transform: scale(1.02); }
+
+/* Fade in animation */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+article { animation: fadeIn 0.5s ease-out; }
+
+/* Star rating display */
+.stars { color: #ffd700; font-size: 1.2rem; letter-spacing: 2px; }
+
+/* Breadcrumb nav */
+.breadcrumb { font-size: 0.85rem; color: #666; margin: 10px 0; }
+.breadcrumb a { color: #00d4ff; text-decoration: none; }
+.breadcrumb span { color: #999; }
