@@ -94,7 +94,7 @@ function initCopyButtons() {
 function loadRelatedPosts() {
     const container = document.getElementById('related-posts');
     if (!container) return;
-    fetch('/aitools-blog/posts/posts.json')
+    fetch(window.location.pathname.replace('/posts/', '/posts/posts.json').replace(/article\/.*/, '') + '../posts/posts.json')
         .then(r => r.json())
         .then(posts => {
             const current = document.querySelector('h1')?.textContent || '';
@@ -102,7 +102,7 @@ function loadRelatedPosts() {
             container.innerHTML = related.map(p => `
                 <div class="post-card" style="cursor:pointer;background:white;border-radius:8px;padding:15px;margin:10px 0;box-shadow:0 1px 5px rgba(0,0,0,0.08);">
                     <div class="category" style="font-size:0.8rem;color:#00d4ff;text-transform:uppercase;">${p.category}</div>
-                    <h4 style="margin:5px 0;"><a href="/aitools-blog/${p.url}" style="color:#1a1a2e;text-decoration:none;">${p.title}</a></h4>
+                    <h4 style="margin:5px 0;"><a href="${p.url}" style="color:#1a1a2e;text-decoration:none;">${p.title}</a></h4>
                 </div>
             `).join('');
         });
