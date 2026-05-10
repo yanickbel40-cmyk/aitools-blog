@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yanissabile.github.io/aitools-blog/sitemap.xml
