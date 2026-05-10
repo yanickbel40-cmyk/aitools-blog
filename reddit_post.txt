@@ -1,0 +1,15 @@
+Title: I built a free resource hub for AI productivity tools - tested 50+ tools
+
+Body: Hey everyone,
+
+I've been testing AI productivity tools for months and compiled everything into a free blog: AI Toolbox Pro.
+
+What's inside:
+- 20+ in-depth tool reviews with pros/cons
+- Step-by-step automation workflow guides
+- Pricing comparisons
+- Monetization strategies (how to earn with AI)
+
+All independent, no sponsored content. Just real testing.
+
+Would love your feedback: https://yanickbel40-cmyk.github.io/aitools-blog/
