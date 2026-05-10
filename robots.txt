@@ -1,3 +1,11 @@
 User-agent: *
 Allow: /
 Sitemap: https://yanickbel40-cmyk.github.io/aitools-blog/sitemap.xml
+
+# Speed up Googlebot
+User-agent: Googlebot
+Crawl-delay: 1
+Allow: /
+
+User-agent: *
+Disallow: /*?ref=
