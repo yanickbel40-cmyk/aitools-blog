@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Productivity Score — How Productive Are You? | AI Toolbox Pro</title>
+    <meta name="description" content="Take the free AI Productivity Score quiz. Discover how your productivity compares and get personalized AI tool recommendations.">
+    <meta property="og:title" content="AI Productivity Score — Test Your Productivity Level">
+    <meta property="og:description" content="Free quiz reveals your productivity score and recommends AI tools to boost it.">
+    <link rel="canonical" href="https://yanickbel40-cmyk.github.io/aitools-blog/apps/productivity-score.html">
+    <link rel="stylesheet" href="../assets/pro-styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); min-height: 100vh; }
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 20px; color: white; }
+        header h1 { font-size: 2rem; margin-bottom: 10px; }
+        header h1 span { color: #00d4ff; }
+        header p { opacity: 0.8; }
+        .card { background: white; border-radius: 16px; padding: 30px; margin: 20px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .question { display: none; }
+        .question.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .question h3 { font-size: 1.2rem; margin-bottom: 20px; color: #1a1a2e; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: center; padding: 14px 18px; border: 2px solid #e1e4e8; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #302b63; background: #f8f9fa; }
+        .option.selected { border-color: #00d4ff; background: #e8f7fe; }
+        .option input { margin-right: 12px; accent-color: #00d4ff; }
+        .option label { cursor: pointer; flex: 1; font-weight: 500; }
+        .option .score { color: #999; font-size: 0.85rem; }
+        .progress-bar { height: 6px; background: #e1e4e8; border-radius: 3px; margin: 20px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.5s; border-radius: 3px; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; gap: 10px; }
+        .nav-btn { padding: 12px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .nav-btn.prev { background: #e1e4e8; color: #333; }
+        .nav-btn.next { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; flex: 1; }
+        .nav-btn.next:hover { transform: translateY(-1px); }
+
+        /* Results */
+        .result { display: none; }
+        .result.active { display: block; animation: fadeIn 0.6s ease; }
+        .score-circle { width: 180px; height: 180px; border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; font-weight: bold; }
+        .score-circle .score-number { font-size: 3.5rem; line-height: 1; }
+        .score-circle .score-label { font-size: 0.9rem; opacity: 0.9; }
+        .rec-card { background: #f8f9fa; padding: 18px; border-radius: 12px; margin: 12px 0; border-left: 4px solid #00d4ff; }
+        .rec-card h4 { margin-bottom: 5px; }
+        .rec-card a { color: #667eea; text-decoration: none; font-weight: 500; }
+        .rec-card a:hover { text-decoration: underline; }
+        .share-score { text-align: center; margin: 20px 0; }
+        .share-score button { background: #1da1f2; color: white; border: none; padding: 10px 25px; border-radius: 25px; font-weight: 600; cursor: pointer; }
+        .restart-btn { background: #333; color: white; border: none; padding: 10px 25px; border-radius: 10px; cursor: pointer; margin-top: 15px; }
+        footer { text-align: center; color: white; opacity: 0.6; padding: 30px; }
+        footer a { color: #00d4ff; }
+        @media (max-width: 600px) { header h1 { font-size: 1.5rem; } .card { padding: 20px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <p><a href="../" style="color:white;opacity:0.6;text-decoration:none;">← AI Toolbox Pro</a></p>
+        <h1>🧠 AI <span>Productivity Score</span></h1>
+        <p>Answer 6 questions and discover your productivity personality + AI recommendations</p>
+    </header>
+
+    <div class="card" id="quizCard">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width:0%"></div>
+        </div>
+
+        <!-- Questions -->
+        <div class="question active" data-q="0">
+            <h3>1. How many hours per week do you spend on repetitive digital tasks? (emails, data entry, scheduling)</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(0,0)"><input type="radio" name="q0"><label>Less than 5 hours — I'm already efficient</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(0,1)"><input type="radio" name="q0"><label>5-15 hours — A significant chunk of my week</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(0,2)"><input type="radio" name="q0"><label>15-30 hours — I'm drowning in tasks</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(0,3)"><input type="radio" name="q0"><label>30+ hours — Automation would change my life</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="question" data-q="1">
+            <h3>2. Which AI tools have you used in the past month?</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(1,0)"><input type="radio" name="q1"><label>None — Manual is still my way</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(1,1)"><input type="radio" name="q1"><label>1 tool (e.g., ChatGPT)</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(1,2)"><input type="radio" name="q1"><label>2-3 tools</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(1,3)"><input type="radio" name="q1"><label>4+ tools — Power user</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="question" data-q="2">
+            <h3>3. How do you handle content creation? (writing, images, social media)</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(2,0)"><input type="radio" name="q2"><label>I do it all manually</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(2,1)"><input type="radio" name="q2"><label>Mix of manual and AI assistance</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(2,2)"><input type="radio" name="q2"><label>Mostly AI with human editing</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(2,3)"><input type="radio" name="q2"><label>Fully automated AI pipeline</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="question" data-q="3">
+            <h3>4. Do you automate workflows between apps?</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(3,0)"><input type="radio" name="q3"><label>What's automation? I do everything manually</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(3,1)"><input type="radio" name="q3"><label>Basic (email filters, simple rules)</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(3,2)"><input type="radio" name="q3"><label>Some (Zapier/Make connections)</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(3,3)"><input type="radio" name="q3"><label>Advanced — Multi-step automation with AI agents</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="question" data-q="4">
+            <h3>5. How much time do you waste on meetings?</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(4,0)"><input type="radio" name="q4"><label>Minimal — I keep meetings tight</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(4,1)"><input type="radio" name="q4"><label>Some — Could be better</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(4,2)"><input type="radio" name="q4"><label>Too many — Meetings eat my work time</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(4,3)"><input type="radio" name="q4"><label>My calendar is a nightmare</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="question" data-q="5">
+            <h3>6. How do you track and manage your tasks?</h3>
+            <div class="options">
+                <div class="option" onclick="selectOption(5,0)"><input type="radio" name="q5"><label>Paper / sticky notes</label><span class="score">+0</span></div>
+                <div class="option" onclick="selectOption(5,1)"><input type="radio" name="q5"><label>Basic to-do app</label><span class="score">+2</span></div>
+                <div class="option" onclick="selectOption(5,2)"><input type="radio" name="q5"><label>Project management tool (Notion, Asana, Trello)</label><span class="score">+4</span></div>
+                <div class="option" onclick="selectOption(5,3)"><input type="radio" name="q5"><label>AI-powered task management with automations</label><span class="score">+6</span></div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn prev" onclick="prevQuestion()" disabled id="prevBtn">← Previous</button>
+            <button class="nav-btn next" onclick="nextQuestion()" id="nextBtn">Next →</button>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="card result" id="resultCard">
+        <div style="text-align:center;">
+            <div class="score-circle" id="scoreCircle">
+                <div class="score-number" id="totalScore">0</div>
+                <div class="score-label" id="scoreLevel">Beginner</div>
+            </div>
+            <h2 id="resultTitle">Your Productivity Score</h2>
+            <p style="color:#666;margin-bottom:20px;" id="resultDesc"></p>
+        </div>
+
+        <h3>💡 Personalized Recommendations</h3>
+        <div id="recommendations"></div>
+
+        <div class="share-score">
+            <button onclick="shareScore()">🐦 Share my score on X</button>
+        </div>
+        <div style="text-align:center;">
+            <button class="restart-btn" onclick="restartQuiz()">🔄 Retake Quiz</button>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="../">AI Toolbox Pro</a> · <a href="../privacy.html">Privacy</a></p>
+    </footer>
+</div>
+
+<script>
+const QUESTIONS = 6;
+const answers = {};
+let currentQ = 0;
+let selected = {};
+
+function selectOption(qIndex, optIndex) {
+    selected[qIndex] = optIndex;
+    
+    // Update visual
+    document.querySelectorAll(`.question[data-q="${qIndex}"] .option`).forEach((el, i) => {
+        el.classList.toggle('selected', i === optIndex);
+        el.querySelector('input').checked = (i === optIndex);
+    });
+    
+    // Enable next button
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+    if (selected[currentQ] === undefined) return;
+    
+    if (currentQ === QUESTIONS - 1) {
+        showResults();
+        return;
+    }
+    
+    document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+    currentQ++;
+    document.querySelector(`.question[data-q="${currentQ}"]`).classList.add('active');
+    
+    updateProgress();
+    updateNavButtons();
+}
+
+function prevQuestion() {
+    document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+    currentQ--;
+    document.querySelector(`.question[data-q="${currentQ}"]`).classList.add('active');
+    
+    updateProgress();
+    updateNavButtons();
+}
+
+function updateProgress() {
+    const progress = ((currentQ) / QUESTIONS) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+}
+
+function updateNavButtons() {
+    document.getElementById('prevBtn').disabled = currentQ === 0;
+    const nextBtn = document.getElementById('nextBtn');
+    
+    if (currentQ === QUESTIONS - 1) {
+        nextBtn.textContent = '🎯 See My Score';
+    } else {
+        nextBtn.textContent = 'Next →';
+    }
+    
+    // Disable next if no option selected
+    nextBtn.disabled = selected[currentQ] === undefined;
+}
+
+function calculateScore() {
+    let total = 0;
+    for (let q = 0; q < QUESTIONS; q++) {
+        const optIndex = selected[q] || 0;
+        total += optIndex; // 0, 2, 4, 6 points
+    }
+    return total;
+}
+
+function getScoreLevel(score) {
+    if (score <= 4) return { level: 'Efficiency Expert', color: '#4CAF50', desc: 'You\'re already highly productive! AI can still help you fine-tune and automate the last remaining manual tasks.' };
+    if (score <= 8) return { level: 'Productive Pro', color: '#2196F3', desc: 'Good foundation! You\'re using some AI tools but there\'s room to double your productivity with automation.' };
+    if (score <= 14) return { level: 'AI Explorer', color: '#FF9800', desc: 'You\'ve started your AI journey but manual tasks still consume too much time. Let\'s cut that down.' };
+    if (score <= 20) return { level: 'Automation Seeker', color: '#9C27B0', desc: 'You know AI tools exist but aren\'t fully leveraging them. Big wins ahead with workflow automation.' };
+    return { level: 'Digital Drowning', color: '#f44336', desc: 'Too many manual tasks slowing you down. AI can reclaim 50%+ of your work week immediately.' };
+}
+
+function getRecommendations(score) {
+    const baseUrl = 'https://yanickbel40-cmyk.github.io/aitools-blog';
+    const recs = [
+        {
+            title: '📝 Start with AI Writing Assistants',
+            link: baseUrl + '/posts/guides/best-ai-productivity-tools-2026.html',
+            text: 'Begin with ChatGPT or Claude for emails, content, and research tasks'
+        },
+        {
+            title: '⚙️ Automate Your Workflows',
+            link: baseUrl + '/posts/guides/ai-automation-workflows-business.html',
+            text: 'Connect your tools with Zapier or Make to save hours daily'
+        },
+        {
+            title: '📞 Try an AI Meeting Assistant',
+            link: baseUrl + '/posts/guides/ai-meeting-assistant-review.html',
+            text: 'Automate meeting notes, summaries, and action items'
+        },
+        {
+            title: '🎨 Generate Content with AI',
+            link: baseUrl + '/posts/reviews/midjourney-vs-dall-e-vs-stable-diffusion.html',
+            text: 'Images, videos, and social media posts in minutes'
+        },
+        {
+            title: '🤖 Build an AI Chatbot',
+            link: baseUrl + '/posts/reviews/chatgpt-vs-claude-vs-gemini-2026.html',
+            text: 'Customer service, FAQs, and lead generation — automated'
+        },
+        {
+            title: '💼 Use AI Project Management',
+            link: baseUrl + '/posts/guides/ai-content-creation-strategy.html',
+            text: 'AI-powered task prioritization and deadline tracking'
+        }
+    ];
+    
+    if (score <= 4) return [recs[0], recs[2]];
+    if (score <= 8) return [recs[1], recs[3], recs[4]];
+    if (score <= 14) return [recs[0], recs[1], recs[2]];
+    return recs;
+}
+
+function showResults() {
+    document.getElementById('quizCard').style.display = 'none';
+    document.getElementById('resultCard').classList.add('active');
+    
+    const score = calculateScore();
+    const info = getScoreLevel(score);
+    
+    document.getElementById('totalScore').textContent = score + '/36';
+    document.getElementById('scoreCircle').style.background = `linear-gradient(135deg, ${info.color}, #1a1a2e)`;
+    document.getElementById('scoreLevel').textContent = info.level;
+    document.getElementById('resultTitle').textContent = info.level;
+    document.getElementById('resultDesc').textContent = info.desc;
+    
+    const recs = getRecommendations(score);
+    const recDiv = document.getElementById('recommendations');
+    recDiv.innerHTML = recs.map(r => `
+        <div class="rec-card">
+            <h4>${r.title}</h4>
+            <p>${r.text}</p>
+            <a href="${r.link}">Read full guide →</a>
+        </div>
+    `).join('');
+    
+    window._score = score;
+    window._level = info.level;
+}
+
+function shareScore() {
+    const text = `🧠 My AI Productivity Score: ${window._score}/36 — Level: ${window._level}\nHow productive are you? Take the quiz →`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=https://yanickbel40-cmyk.github.io/aitools-blog/apps/productivity-score.html`, '_blank');
+}
+
+function restartQuiz() {
+    Object.keys(selected).forEach(k => delete selected[k]);
+    currentQ = 0;
+    document.getElementById('resultCard').classList.remove('active');
+    document.getElementById('quizCard').style.display = 'block';
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.querySelector('.question[data-q="0"]').classList.add('active');
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+    updateProgress();
+    updateNavButtons();
+    document.getElementById('nextBtn').disabled = true;
+}
+
+// Initialize
+updateProgress();
+updateNavButtons();
+</script>
+</body>
+</html>
